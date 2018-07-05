@@ -119,6 +119,33 @@ nav h1 a {
 	text-transform: uppercase;
 }
 
+.skip-link {
+	height: 1px;
+	left: -999px;
+	overflow: hidden;
+	position: absolute;
+	top: auto;
+	width: 1px;
+	z-index: -999;
+}
+
+.skip-link:focus,
+.skip-link:active {
+	background-color: #252831;
+	border: 4px solid orange;
+	border-radius: 15px;
+	color: #fff;
+	font-size: 1.3em;
+	height: 72px;
+	left: auto;
+	overflow:auto;
+	text-align: center;
+	top: auto;
+	width: 20%;
+	z-index: 999;
+	line-height: 72px;
+}
+
 #breadcrumb {
 	background-color: #eee;
 	font-size: 17px;
@@ -153,6 +180,10 @@ nav h1 a {
 }
 
 @media screen and (max-width: 770px) {
+	.skip-link:focus,
+	.skip-link:active {
+		width: 70%;
+	}
 	#breadcrumb {
 		height: 48px;
 		padding: 0 20px 0;
