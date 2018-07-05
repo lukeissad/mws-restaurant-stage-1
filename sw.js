@@ -1,6 +1,8 @@
+let staticCacheName = 'restaurant-cache-v1';
+
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open('restaurant-cache').then(function(cache) {
+    caches.open(staticCacheName).then(function(cache) {
       return cache.addAll([
         '/',
         '/index.html',
@@ -21,6 +23,20 @@ self.addEventListener('install', function(event) {
         '/img/9.jpg',
         '/img/10.jpg'
       ]);
+    })
+  );
+});
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName) {
+          return cacheName.startsWith('restaurant-') && cacheName != staticCacheName;
+        }).map(function(cacheName) {
+          return cache.delete(cacheName);
+        })
+      );
     })
   );
 });
